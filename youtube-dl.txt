@@ -11,4 +11,5 @@
    1) youtube-dl -F --proxy "socks5://127.0.0.1:7891/" https://www.youtube.com/watch\?v\=3M0Bhy19Ta4
    2) youtube-dl -f 22 --proxy "socks5://127.0.0.1:7891/" https://www.youtube.com/watch\?v\=3M0Bhy19Ta4
    
-   youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]' https://www.youtube.com/watch?v=CbFQ17wj05E
+   下载画质与音质最好的MP4文件：
+   youtube-dl -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]' --merge-output-format mp4 --write-sub --sub-format srt https://www.youtube.com/watch?v=CbFQ17wj05E
