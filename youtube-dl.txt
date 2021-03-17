@@ -1,0 +1,14 @@
+1. 安装：
+ (1) ubuntu:
+   sudo pip install --upgrade youtube_dl 
+ (2) MacOS:
+   brew install youtube-dl
+
+2. 使用方法：
+ (1) 国内网站：
+   youtube-dl 'http://www.bilibili.com/video/av11728123/'
+ (2) 国外网站：
+   1) youtube-dl -F --proxy "socks5://127.0.0.1:7891/" https://www.youtube.com/watch\?v\=3M0Bhy19Ta4
+   PICTURE:/home/tuhailong/.config/tencent-qq//AppData/file//sendpix0.jpg
+   2) youtube-dl -f 22 --proxy "socks5://127.0.0.1:7891/" https://www.youtube.com/watch\?v\=3M0Bhy19Ta4
+   PICTURE:/home/tuhailong/.config/tencent-qq//AppData/file//sendpix1.jpg
