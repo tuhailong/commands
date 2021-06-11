@@ -1,0 +1,2 @@
+通过包名启动应用：
+adb shell monkey -p XXX -c android.intent.category.LAUNCHER 1
