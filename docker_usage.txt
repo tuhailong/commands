@@ -43,6 +43,6 @@
 
 5. 执行docker build -t aosp:1.0 .
 
-6. docker run -it --name aosp -v ~/aosp:/home/${YOUR_NAME}/aosp -u ${YOUR_NAME} aosp:1.0 /bin/bash
+6. docker run --privileged -it --name aosp -v ~/aosp:/home/${YOUR_NAME}/aosp -u ${YOUR_NAME} aosp:1.0 /bin/bash
 
 7. docker start aosp; docker exec -it aosp /bin/bash
