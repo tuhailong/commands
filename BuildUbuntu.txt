@@ -1,0 +1,13 @@
+1. Ubuntu上安装最新版本内核：
+  (1) wget https://raw.githubusercontent.com/pimlie/ubuntu-mainline-kernel.sh/master/ubuntu-mainline-kernel.sh .
+  (2) sudo install ubuntu-mainline-kernel.sh /usr/local/bin/
+  (3) ubuntu-mainline-kernel.sh -c
+  (4) sudo ubuntu-mainline-kernel.sh -i
+  (5) sudo reboot
+  (6) uname -rs
+
+2. 下载kernel
+  (1) mkdir kernel_stable && git clone https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git kernel_stable
+  (2) cd kernel_stable
+  (3) git tag -l | grep x.yy.z
+  (4) git checkout -b x.yy.z vx.yy.z
