@@ -9,12 +9,15 @@
 2. 下载kernel
   (1) mkdir kernel_stable && git clone https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git kernel_stable
   (2) cd kernel_stable
-  (3) git tag -l | grep x.yy.z
-  (4) git checkout -b x.yy.z vx.yy.z
-  
-  
-vim .config 配置
+  (3) git tag -l | grep 5.16.2
+  (4) git checkout -b v5.16.2 v5.16.2
+  (5) make mrproper
+
+3. 执行make xconfig，会自动选取当前内核的配置文件当做.config文件，也可以在这个基础上修改
+make xconfig
+
+4. vim .config 配置
 CONFIG_SYSTEM_TRUSTED_KEYS=""
 CONFIG_SYSTEM_REVOCATION_KEYS=""
 
-make bzImage -j8 && make modules -j8 && sudo make INSTALL_MOD_STRIP=1 modules_install -j8 && sudo mkinitramfs /lib/modules/5.16.2 -o /boot/initrd.img-5.16.2 && sudo cp arch/x86/boot/bzImage /boot/vmlinuz-5.16.2  && sudo cp System.map /boot/System.map-5.16.2 && sudo update-grub2
+5. make bzImage -j8 && make modules -j8 && sudo make INSTALL_MOD_STRIP=1 modules_install -j8 && sudo mkinitramfs /lib/modules/5.16.2 -o /boot/initrd.img-5.16.2 && sudo cp arch/x86/boot/bzImage /boot/vmlinuz-5.16.2  && sudo cp System.map /boot/System.map-5.16.2 && sudo update-grub2
