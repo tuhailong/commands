@@ -12,13 +12,32 @@
   (3) git tag -l | grep 5.16.2
   (4) git checkout -b v5.16.2 v5.16.2
   (5) make mrproper
+  
+3. 安装及配置ccache
+  sudo apt install ccache
 
-3. 执行make xconfig，会自动选取当前内核的配置文件当做.config文件，也可以在这个基础上修改
+  sudo gedit ~/.bashrc
+
+  export USE_CCACHE=1
+  export CCACHE_DIR="/home/tuhailong/.ccache" 
+  export CC="ccache gcc"    
+  export CXX="ccache g++"    
+  export PATH="$PATH:/usr/lib/ccache"
+
+  source ~/.bashrc    
+
+  ccache -M 50G
+
+4. 安装依赖
+  sudo apt install libncurses5-dev openssl libssl-dev build-essential pkg-config libc6-dev bison flex libelf-dev zlibc minizip libidn11-dev libidn11 qttools5-dev liblz4-tool
+
+
+5. 执行make xconfig，会自动选取当前内核的配置文件当做.config文件，也可以在这个基础上修改
 make xconfig
 
-4. vim .config 配置
+6. vim .config 配置
 CONFIG_SYSTEM_TRUSTED_KEYS=""
 CONFIG_SYSTEM_REVOCATION_KEYS=""
 # CONFIG_DEBUG_INFO_BTF is not set
 
-5. make bzImage -j8 && make modules -j8 && sudo make INSTALL_MOD_STRIP=1 modules_install -j8 && sudo mkinitramfs /lib/modules/5.16.2+ -o /boot/initrd.img-5.16.2 && sudo cp arch/x86/boot/bzImage /boot/vmlinuz-5.16.2  && sudo cp System.map /boot/System.map-5.16.2 && sudo update-grub2
+7. make bzImage -j8 && make modules -j8 && sudo make INSTALL_MOD_STRIP=1 modules_install -j8 && sudo mkinitramfs /lib/modules/5.16.2+ -o /boot/initrd.img-5.16.2 && sudo cp arch/x86/boot/bzImage /boot/vmlinuz-5.16.2  && sudo cp System.map /boot/System.map-5.16.2 && sudo update-grub2
