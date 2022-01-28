@@ -41,3 +41,6 @@ CONFIG_SYSTEM_REVOCATION_KEYS=""
 # CONFIG_DEBUG_INFO_BTF is not set
 
 7. make bzImage -j8 && make modules -j8 && sudo make INSTALL_MOD_STRIP=1 modules_install -j8 && sudo mkinitramfs /lib/modules/5.16.2+ -o /boot/initrd.img-5.16.2 && sudo cp arch/x86/boot/bzImage /boot/vmlinuz-5.16.2  && sudo cp System.map /boot/System.map-5.16.2 && sudo update-grub2
+
+
+
