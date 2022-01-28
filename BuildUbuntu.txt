@@ -29,7 +29,7 @@
   ccache -M 50G
 
 4. 安装依赖
-  sudo apt install libncurses5-dev openssl libssl-dev build-essential pkg-config libc6-dev bison flex libelf-dev zlibc minizip libidn11-dev libidn11 qttools5-dev liblz4-tool
+  sudo apt install zstd libncurses5-dev openssl libssl-dev build-essential pkg-config libc6-dev bison flex libelf-dev zlibc minizip libidn11-dev libidn11 qttools5-dev liblz4-tool
 
 
 5. 执行make xconfig，会自动选取当前内核的配置文件当做.config文件，也可以在这个基础上修改
