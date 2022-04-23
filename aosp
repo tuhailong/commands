@@ -1,0 +1,4 @@
+https://android-review.googlesource.com/q/topic:damon-series
+
+
+python $HOME/bin/repo-pull.py bash 'topic:damon-series' -g https://android-review.googlesource.com > /home/tuhailong/damon-series_merged.sh && bash /home/tuhailong/damon-series_merged.sh
