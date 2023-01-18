@@ -9,7 +9,7 @@ After = network-online.target
 
 [Service]
 Type = simple
-ExecStart = /usr/bin/socat -dd TCP-LISTEN:8888,reuseaddr,fork TCP6:rpi.linkable.space:80
+ExecStart = /usr/bin/socat -dd TCP-LISTEN:8888,reuseaddr,fork TCP6:rpi.linkable.space:80 #将本地8888端口的流量转发给rpi.linkable.space:80
 Restart = on-failure
 TimeoutSec = 30
 
