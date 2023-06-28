@@ -1,87 +1,60 @@
 #!/bin/bash
 
-KNLS_ROOT=${HOME}/0_Kernel
-ACKS_ROOT=${HOME}/1_ACKs
-AOSP_ROOT=${HOME}/2_AOSP
-PIXEL_ROOT=${HOME}/3_Pixel
+kernel_dir=${HOME}/0_Kernel
+declare -a kernel_branches=(
+    [0]="mainline"
+    [1]="stable"
+)
+for key in ${!kernel_branches[*]}; do
+    des_dir="${kernel_dir}/${key}_${kernel_branches[${key}]}"
+    echo ${des_dir} ${kernel_branches[${key}]}
 
-cd ${HOME}
-for dir in ${KNLS_ROOT}/*
-do
-    if test -d $dir
-    then
-        cd $dir
-        echo "Sync latest kernel code in $dir"
-        git pull
-
-        sleep 3
-
-        echo "Sync latest kernel code in $dir"
-        git pull
+    if [ ! -d "${des_dir}" ]; then
+        mkdir -p ${des_dir}
+        cd ${des_dir}
+        if [[ ${des_dir} =~ "mainline" ]]
+        then
+            git clone https://kernel.googlesource.com/pub/scm/linux/kernel/git/torvalds/linux -b master .
+        fi
+        if [[ ${des_dir} =~ "stable" ]]
+        then
+            git clone https://kernel.googlesource.com/pub/scm/linux/kernel/git/stable/linux -b master .
+        fi
     fi
+
+    cd ${des_dir}
+    echo "sync code in `pwd`"
+    git pull
+    sleep 3
+    git pull
 done
-
 cd ${HOME}
-for dir in ${ACKS_ROOT}/*
-do
-    if test -d $dir
-    then
-        cd $dir
-        cd .repo/repo && git pull
-        cd $dir
-        echo "Sync latest aosp code in $dir"
-        repo sync -c -j8
 
-        sleep 3
 
-        cd $dir
-        cd .repo/repo && git pull
-        cd $dir
-        echo "Sync latest aosp code in $dir"
-        repo sync -c -j8
+acks_dir=${HOME}/1_ACKs
+declare -a acks_branches=(
+    [0]="android-mainline"
+    [1]="android14-6.1"
+    [3]="android13-5.15"
+    [5]="android12-5.10"
+)
+for key in ${!acks_branches[*]}; do
+    branch="common-${acks_branches[${key}]}"
+    des_dir="${acks_dir}/${key}_${acks_branches[${key}]}"
+    echo ${des_dir} ${branch}
+
+    if [ ! -d "${des_dir}" ]; then
+        mkdir -p ${des_dir}
+        cd ${des_dir}
+        repo init -u https://android.googlesource.com/kernel/manifest -b ${branch}
     fi
-done
 
-cd ${HOME}
-for dir in ${AOSP_ROOT}/*
-do
-    if test -d $dir
-    then
-        cd $dir
-        cd .repo/repo && git pull
-        cd $dir
-        echo "Sync latest aosp code in $dir"
-        #repo forall -c "git reset --hard" -j8
-        repo sync -c -j8
-
-        sleep 3
-
-        cd $dir
-        cd .repo/repo && git pull
-        cd $dir
-        echo "Sync latest aosp code in $dir"
-        repo sync -c -j8
-    fi
-done
-
-cd ${HOME}
-for dir in ${PIXEL_ROOT}/*
-do
-    if test -d $dir
-    then
-        cd $dir
-        cd .repo/repo && git pull
-        cd $dir
-        echo "Sync latest aosp code in $dir"
-        repo sync -c -j8
-
-        sleep 3
-
-        cd $dir
-        cd .repo/repo && git pull
-        cd $dir
-        echo "Sync latest aosp code in $dir"
-        repo sync -c -j8
-    fi
+    cd ${des_dir}
+    echo "sync code in `pwd`"
+    cd .repo/repo && git pull
+    cd ${des_dir}
+    repo sync -c -j6
+    sleep 3
+    repo sync -c -j6
 done
 cd ${HOME}
